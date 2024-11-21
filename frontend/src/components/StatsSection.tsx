@@ -4,14 +4,6 @@ import { Beer, Video, Trophy } from "lucide-react"; // Import your icons here
 import { api } from "../utils/api";
 import { useUserStore } from "../libs/zustand/auth";
 
-type TStats = {
-  label: string;
-  value: string;
-  icon: React.ReactNode;
-  color: string;
-  count: number;
-};
-
 type TAnalytics = {
   videoPendingCount: number;
   totalEntryCount: number;
