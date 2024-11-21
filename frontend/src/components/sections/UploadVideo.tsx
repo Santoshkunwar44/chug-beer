@@ -4,8 +4,9 @@ import { api } from "../../utils/api";
 import { Button, Card, CardBody, CardFooter } from "@nextui-org/react";
 import { Upload } from "lucide-react";
 import useToast from "../../hooks/useToast";
+import ReusableModal from "../../shared/Modal";
 
-const UploadVideo = ({
+const UploadVideoContent = ({
   entryId,
   success,
 }: {
@@ -102,6 +103,7 @@ const UploadVideo = ({
             >
               <input
                 type="file"
+                accept="video/*"
                 onChange={handleFileChange}
                 className="hidden"
                 ref={fileInputRef}
@@ -126,6 +128,40 @@ const UploadVideo = ({
           </CardFooter>
         </Card>
       </div>
+    </div>
+  );
+};
+
+const UploadVideo = ({
+  entryId,
+  success,
+}: {
+  entryId: string;
+  success: () => void;
+}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <div>
+      <ReusableModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        hideActionButton={true}
+        backdrop="blur"
+        actionButtonClick={() => {}}
+        bodyContent={
+          <>
+            <UploadVideoContent entryId={entryId} success={success} />
+          </>
+        }
+        title="Upload video for this entry"
+        actionButtonText="upload video"
+        button={
+          <Button className="bg-[#7C3AED]" onClick={() => setIsModalOpen(true)}>
+            Upload video
+          </Button>
+        }
+      ></ReusableModal>
     </div>
   );
 };

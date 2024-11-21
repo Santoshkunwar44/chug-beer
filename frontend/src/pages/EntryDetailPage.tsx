@@ -6,29 +6,43 @@ import {
   Divider,
   Input,
 } from "@nextui-org/react";
-import { MessageCircle, Share2 } from "lucide-react";
+import { MessageCircle, Trash } from "lucide-react";
 import AppNavbar from "../shared/Navbar";
 import { api } from "../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { TComment, TEntry } from "../utils/types";
 import moment from "moment";
 import CommentSection from "../components/sections/CommentSection";
-import ReusableModal from "../shared/Modal";
 import { useUserStore } from "../libs/zustand/auth";
 import UploadVideo from "../components/sections/UploadVideo";
+import useToast from "../hooks/useToast";
 
 export default function EntryDetail() {
   const params = useParams();
   const [entry, setEntry] = React.useState<TEntry | null>(null);
   const { user } = useUserStore();
+  const { showToast } = useToast();
   const [comments, setComments] = React.useState<TComment[]>([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (params.id) {
       fetchEntryById();
       fetchCommentsOfEntry();
     }
   }, [params.id]);
+
+  const handleDeleteEntry = async () => {
+    try {
+      const { status } = await api.deleteEntryApi(params.id as string);
+      if (status === 200) {
+        navigate("/");
+        showToast("Entry deleted successfully", "success");
+      }
+    } catch (error) {
+      showToast("Failed to delete entry", "error");
+      console.log(error);
+    }
+  };
 
   const fetchEntryById = async () => {
     try {
@@ -110,26 +124,7 @@ export default function EntryDetail() {
               </div>
               <div className="my-6">
                 {entry.userId?._id === user?._id && !entry.videoUrl && (
-                  <ReusableModal
-                    hideActionButton={true}
-                    backdrop="blur"
-                    actionButtonClick={() => {}}
-                    bodyContent={
-                      <>
-                        <UploadVideo
-                          success={fetchEntryById}
-                          entryId={entry._id}
-                        />
-                      </>
-                    }
-                    title="Upload video for this entry"
-                    actionButtonText="upload video"
-                    button={
-                      <Button className="bg-[#7C3AED] pointer-events-none">
-                        Upload video
-                      </Button>
-                    }
-                  ></ReusableModal>
+                  <UploadVideo entryId={entry._id} success={fetchEntryById} />
                 )}
               </div>
 
@@ -142,14 +137,17 @@ export default function EntryDetail() {
                 >
                   {comments.length} Comments
                 </Button>
-                <Button
-                  color="primary"
-                  variant="flat"
-                  startContent={<Share2 size={16} />}
-                  className="text-indigo-500 font-semibold flex"
-                >
-                  Share
-                </Button>
+                {entry.userId?._id === user?._id && (
+                  <Button
+                    onClick={handleDeleteEntry}
+                    color="danger"
+                    variant="flat"
+                    startContent={<Trash size={16} />}
+                    className="text-indigo-500 font-semibold flex"
+                  >
+                    Delete
+                  </Button>
+                )}
               </div>
 
               <Divider className="my-8 bg-gray-700" />

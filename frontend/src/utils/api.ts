@@ -45,14 +45,14 @@ const getEntriesOfUserApi = async (
     }`
   );
 
+const deleteEntryApi = async (entryId: string) =>
+  axiosInstance.delete(`/api/entry/${entryId}`);
+
 const getEntryByIdApi = async (entryId: string) =>
   axiosInstance.get(`/api/entry/${entryId}`);
 
 const uploadVideoToEntryApi = async (entryId: string, videoUrl: string) =>
   axiosInstance.put(`/api/entry/${entryId}`, { videoUrl });
-
-const deleteEntryApi = async (entryId: string) =>
-  axiosInstance.delete(`/api/entry/${entryId}`);
 
 const getDashboardAnalyticsApi = async (userId: string) =>
   axiosInstance.get(`/api/entry/analytics/${userId}`);
