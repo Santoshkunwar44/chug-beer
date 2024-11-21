@@ -61,6 +61,7 @@ export class EntryController {
       // Query the database with the built query object
       const total = await Entry.countDocuments(query);
       const entries = await Entry.find(query)
+        .sort({ createdAt: -1 })
         .skip(skip)
         .limit(perPage)
         .populate("userId", {

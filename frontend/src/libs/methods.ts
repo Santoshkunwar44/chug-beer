@@ -2,7 +2,6 @@ import CryptoJS from "crypto-js";
 
 const secretKey = "(dfghjlkljgfdghjk)gyftgjvm&bhvbghb,hkbjn-bn.n@bn0-"; // Keep this key safe and secure!
 
-
 const addUserDataToLS = ({ userId }: { userId: string }) => {
   const payload = {
     userId: userId,
@@ -26,7 +25,12 @@ const getUserDataFromLS = (): { userId: string } | null => {
   }
 };
 
+const removeUserDataFromLS = () => {
+  localStorage.removeItem("_AimAuAilAoei2");
+};
+
 export const methods = {
   addUserDataToLS,
   getUserDataFromLS,
+  removeUserDataFromLS,
 };

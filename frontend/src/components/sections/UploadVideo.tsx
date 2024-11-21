@@ -3,6 +3,7 @@ import useUploadFile from "../../hooks/useUploadFile";
 import { api } from "../../utils/api";
 import { Button, Card, CardBody, CardFooter } from "@nextui-org/react";
 import { Upload } from "lucide-react";
+import useToast from "../../hooks/useToast";
 
 const UploadVideo = ({
   entryId,
@@ -16,7 +17,7 @@ const UploadVideo = ({
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
-
+  const { showToast } = useToast();
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedFile(e.target.files[0]);
@@ -70,11 +71,13 @@ const UploadVideo = ({
         }
         const { status } = await api.uploadVideoToEntryApi(entryId, url);
         if (status === 200) {
+          showToast("Video uploaded successfully", "success");
           success();
         }
         setIsUploading(false);
       });
     } catch (error) {
+      showToast("Failed to upload video", "error");
       setIsUploading(false);
       console.log(error);
     }

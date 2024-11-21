@@ -4,14 +4,18 @@ import useFetchUserData from "./hooks/useFetchUserData";
 import Dashboard from "./pages/Dashboard";
 import EntryDetail from "./pages/EntryDetailPage";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { initializeUserData } = useFetchUserData();
+
   useEffect(() => {
     initializeUserData();
   }, []);
+
   return (
     <>
+      <Toaster />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />

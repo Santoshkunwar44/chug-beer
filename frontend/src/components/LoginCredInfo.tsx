@@ -9,8 +9,19 @@ import {
 } from "@nextui-org/react";
 import moment from "moment";
 import { TUser } from "../utils/types";
+import { useUserStore } from "../libs/zustand/auth";
+import { methods } from "../libs/methods";
+import useToast from "../hooks/useToast";
 
 const LoginCredInfo = ({ user }: { user: TUser }) => {
+  const { clearUser } = useUserStore();
+  const { showToast } = useToast();
+  const handleLogout = () => {
+    clearUser();
+    methods.removeUserDataFromLS();
+    showToast("Logout successful", "success");
+    window.location.reload();
+  };
   return (
     <div className="flex  gap-x-3">
       <Popover placement="bottom" showArrow={true}>
@@ -30,7 +41,9 @@ const LoginCredInfo = ({ user }: { user: TUser }) => {
         </PopoverTrigger>
         <PopoverContent className="bg-[#18181B] p-0">
           <Menu>
-            <MenuItem className="bg-red-500 ">LOGOUT</MenuItem>
+            <MenuItem className="bg-red-500 " onClick={handleLogout}>
+              LOGOUT
+            </MenuItem>
           </Menu>
         </PopoverContent>
       </Popover>

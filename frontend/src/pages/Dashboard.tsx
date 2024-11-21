@@ -6,7 +6,6 @@ import {
   CardFooter,
   CardHeader,
   Avatar,
-  Divider,
 } from "@nextui-org/react";
 import { Beer, Trophy, Video, Users } from "lucide-react";
 import AppNavbar from "../shared/Navbar";
@@ -28,7 +27,7 @@ export default function Dashboard() {
       icon: <Video className="w-12 h-12 text-[#7242f5]" />,
       title: "Record Your Chug",
       description:
-        "Chug a beer and record a video of your epic (or not so epic) performance.",
+        "Record a video of your epic (or not so epic) performance.",
     },
     {
       icon: <Users className="w-12 h-12 text-[#7242f5]" />,
@@ -38,9 +37,9 @@ export default function Dashboard() {
     },
     {
       icon: <Trophy className="w-12 h-12 text-[#7242f5]" />,
-      title: "Climb the Leaderboard",
+      title: "Enjoy the Competition",
       description:
-        "Earn points based on your chugging speed and style. Rise through the ranks!",
+        "See how you rank in the leaderboard and win some cool prizes.",
     },
   ];
 
@@ -66,11 +65,9 @@ export default function Dashboard() {
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">
-              How to Use Beer Chug Challenge
+              How to Use UTSFFL Challenge
             </h2>
-            <p className="text-xl text-gray-300">
-              Master the art of competitive chugging in 4 easy steps!
-            </p>
+            <p className="text-xl text-gray-300"></p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -86,10 +83,10 @@ export default function Dashboard() {
                     />
                     <div className="flex flex-col gap-1 items-start justify-center">
                       <h4 className="text-small font-semibold leading-none text-default-600">
-                        ChugBeer
+                        UTSFFL
                       </h4>
                       <h5 className="text-small tracking-tight text-default-400">
-                        @_chug_beer
+                        @_utsffl
                       </h5>
                     </div>
                   </div>
@@ -126,13 +123,13 @@ export default function Dashboard() {
             ))}
           </div>
 
-          <div className="mt-12 text-center">
+          {/* <div className="mt-12 text-center">
             <p className="text-xl mb-6">
               Ready to become a Beer Chug Champion?
             </p>
-          </div>
+          </div> */}
 
-          <Card className="w-full my-4">
+          {/* <Card className="w-full my-4">
             <CardHeader className="flex gap-3">
               <Avatar
                 isBordered
@@ -156,7 +153,7 @@ export default function Dashboard() {
                 </li>
               </ul>
             </CardBody>
-          </Card>
+          </Card> */}
         </div>
       </div>
     </NextUIProvider>

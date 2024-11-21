@@ -62,9 +62,8 @@ const OthersEntries = () => {
           <EntryCard entry={entry} key={entry._id} />
         ))}
       </div>
-
       <div className=" my-8 items-end w-full ">
-        <AppPagination
+      {  pageDetails.total < pageDetails.perPage ? null :  <AppPagination
           setPageChange={(page) => {
             setPageDetails((prev) => ({
               ...prev,
@@ -73,7 +72,7 @@ const OthersEntries = () => {
           }}
           total={Math.ceil(pageDetails.total / pageDetails.perPage) }
           initialPage={pageDetails.currentPage || 1}
-        />
+        />}
       </div>
     </div>
   );

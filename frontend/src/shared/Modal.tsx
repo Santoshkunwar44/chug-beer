@@ -6,7 +6,6 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  useDisclosure,
 } from "@nextui-org/react";
 
 type ReusableModalProps = {
@@ -18,6 +17,8 @@ type ReusableModalProps = {
   button: React.ReactNode;
   actionButtonText?: string;
   hideActionButton?: boolean;
+  isOpen: boolean;
+  onClose: () => void;
 };
 
 const ReusableModal: React.FC<ReusableModalProps> = ({
@@ -25,16 +26,16 @@ const ReusableModal: React.FC<ReusableModalProps> = ({
   bodyContent,
   backdrop = "opaque",
   actions,
-  hideActionButton = false,
+  isOpen,
+  onClose,
   button,
+  hideActionButton = false,
   actionButtonClick,
   actionButtonText,
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log("is open", isOpen);
   return (
     <>
-      <span onClick={onOpen}>{button}</span>
+      <span>{button}</span>
       <Modal
         backdrop={backdrop}
         isOpen={isOpen}
@@ -44,7 +45,9 @@ const ReusableModal: React.FC<ReusableModalProps> = ({
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-center" >{title}</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1 text-center">
+                {title}
+              </ModalHeader>
               <ModalBody>{bodyContent}</ModalBody>
               <ModalFooter>
                 {actions ? (
@@ -57,7 +60,7 @@ const ReusableModal: React.FC<ReusableModalProps> = ({
                     <Button
                       onClick={actionButtonClick}
                       className="bg-[#7242f5] text-white"
-                      onPress={onClose}
+                      // onPress={onClose}
                     >
                       {actionButtonText || "Action"}
                     </Button>

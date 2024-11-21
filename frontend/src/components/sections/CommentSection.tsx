@@ -6,6 +6,7 @@ import { Send } from "lucide-react";
 import { api } from "../../utils/api";
 import { useParams } from "react-router-dom";
 import { useUserStore } from "../../libs/zustand/auth";
+import useToast from "../../hooks/useToast";
 
 const CommentSection = ({
   comments,
@@ -18,11 +19,12 @@ const CommentSection = ({
   const { user } = useUserStore();
   const params = useParams();
 
+  const { showToast } = useToast();
   const handleSubmitComment = async () => {
     const userId = user?._id;
 
     if (!userId) {
-      alert("Please login to create an entry");
+      showToast("please login first", "error");
       return;
     }
     try {
@@ -34,9 +36,12 @@ const CommentSection = ({
 
       if (status === 201) {
         setNewComment("");
+        showToast("Comment added successfully", "success");
+
         refetch();
       }
     } catch (error) {
+      showToast("Failed to add comment", "error");
       console.log(error);
     }
   };
