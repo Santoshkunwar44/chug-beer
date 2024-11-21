@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 export const app = express();
 import routesInit from "./routes/index";
@@ -7,8 +7,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS
 const whitelistedOrigins = [
-  "http://localhost:3000",
-  "http://localhost:3001",
+  "https://chug-beer.netlify.app/",
+  "https://chug-beer.netlify.app",
   "http://localhost:5173",
   "https://chug-beer.netlify.app",
 ];
