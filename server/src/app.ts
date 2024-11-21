@@ -10,6 +10,7 @@ const whitelistedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
   "http://localhost:5173",
+  "https://chug-beer.netlify.app",
 ];
 
 app.use(
@@ -25,4 +26,3 @@ app.use(
 );
 
 routesInit(app);
-
