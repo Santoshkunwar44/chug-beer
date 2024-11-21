@@ -82,14 +82,14 @@ export default function Dashboard() {
                       isBordered
                       radius="full"
                       size="md"
-                      src="https://nextui.org/avatars/avatar-1.png"
+                      src="https://images.pexels.com/photos/7889304/pexels-photo-7889304.jpeg?auto=compress&cs=tinysrgb&w=800"
                     />
                     <div className="flex flex-col gap-1 items-start justify-center">
                       <h4 className="text-small font-semibold leading-none text-default-600">
-                        Zoey Lang
+                        ChugBeer
                       </h4>
                       <h5 className="text-small tracking-tight text-default-400">
-                        @zoeylang
+                        @_chug_beer
                       </h5>
                     </div>
                   </div>
@@ -136,7 +136,7 @@ export default function Dashboard() {
             <CardHeader className="flex gap-3">
               <Avatar
                 isBordered
-                src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                src="https://images.pexels.com/photos/7889304/pexels-photo-7889304.jpeg?auto=compress&cs=tinysrgb&w=800"
               />
               <div className="flex flex-col">
                 <p className="text-md text-default-500">
