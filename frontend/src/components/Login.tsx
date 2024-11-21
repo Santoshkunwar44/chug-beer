@@ -16,6 +16,10 @@ const Login = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleLogin = async () => {
+    if (!loginDetails.username || !loginDetails.password) {
+      showToast("Please enter username and password", "error");
+      return;
+    }
     try {
       const { data, status } = await api.loginUserApi({
         password: loginDetails.password,
