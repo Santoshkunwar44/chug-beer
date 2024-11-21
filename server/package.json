@@ -1,0 +1,47 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node ./src/index.ts",
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "migration:generate": "ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js migration:generate -d src/libs/db/index.ts -o src/libs/db/migrations",
+    "migration:run": "ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js migration:run -d src/libs/db/index.ts",
+    "migration:revert": "ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js migration:revert -d src/libs/db/index.ts",
+    "migration:show": "ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js migration:show -d src/libs/db/index.ts",
+    "migration:push": "ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js migration:push -d src/libs/db/index.ts",
+    "migrate": "npm run migration:run",
+    "migrate:dev": "npm run migration:generate && npm run migration:run",
+    "script": "ts-node -r tsconfig-paths/register ./src/script/main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.9.0",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.13.1",
+    "tsconfig-paths": "^4.2.0",
+    "typeorm": "^0.3.20",
+    "url": "^0.11.4"
+  }
+}
